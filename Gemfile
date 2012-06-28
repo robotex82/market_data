@@ -41,3 +41,6 @@ gem 'jquery-rails'
 group :development do
   gem 'thin'
 end
+
+# To use active admin
+gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'

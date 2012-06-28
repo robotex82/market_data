@@ -8,7 +8,7 @@ class CreateEcmMarketDataTimeSeries < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :ecm_market_data_time_series, :ecm_market_data_provider_id
-    add_index :ecm_market_data_time_series, :ecm_market_data_resoution_id
+    # add_index :ecm_market_data_time_series, :ecm_market_data_provider_id
+    # add_index :ecm_market_data_time_series, :ecm_market_data_resoution_id
   end
 end
