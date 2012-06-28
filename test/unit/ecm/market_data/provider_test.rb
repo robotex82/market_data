@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Ecm::MarketData::DataProviderTest < ActiveSupport::TestCase
+class Ecm::MarketData::ProviderTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
