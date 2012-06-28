@@ -36,3 +36,8 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+# Tu use thin as development server
+group :development do
+  gem 'thin'
+end
