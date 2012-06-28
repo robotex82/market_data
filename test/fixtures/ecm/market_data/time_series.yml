@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  ecm_market_data_provider: 
+  ecm_market_data_resoution: 
+
+two:
+  name: MyString
+  description: MyText
+  ecm_market_data_provider: 
+  ecm_market_data_resoution: 
