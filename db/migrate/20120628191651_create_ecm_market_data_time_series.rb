@@ -3,6 +3,7 @@ class CreateEcmMarketDataTimeSeries < ActiveRecord::Migration
     create_table :ecm_market_data_time_series do |t|
       t.string :name
       t.text :description
+      t.integer :ecm_market_data_bars_count
       t.references :ecm_market_data_provider
       t.references :ecm_market_data_resoution
 
