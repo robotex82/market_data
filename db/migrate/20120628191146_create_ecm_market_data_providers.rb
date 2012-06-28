@@ -7,5 +7,8 @@ class CreateEcmMarketDataProviders < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    # Create a default data providers
+    Ecm::MarketData::Provider.create!(:name => 'Dukascopy')
   end
 end

@@ -7,5 +7,17 @@ class CreateEcmMarketDataResolutions < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    # Create a default resolutions
+    Ecm::MarketData::Resolution.create!(:name => '1 Minute')
+    Ecm::MarketData::Resolution.create!(:name => '5 Minutes')
+    Ecm::MarketData::Resolution.create!(:name => '10 Minutes')
+    Ecm::MarketData::Resolution.create!(:name => '15 Minutes')
+    Ecm::MarketData::Resolution.create!(:name => '15 Minutes')
+    Ecm::MarketData::Resolution.create!(:name => '30 Minutes')
+    Ecm::MarketData::Resolution.create!(:name => '60 Minutes')
+    Ecm::MarketData::Resolution.create!(:name => '1 Day')
+    Ecm::MarketData::Resolution.create!(:name => '1 Week')
+    Ecm::MarketData::Resolution.create!(:name => '1 Month')
   end
 end
