@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628212450) do
+ActiveRecord::Schema.define(:version => 20120628212451) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(:version => 20120628212450) do
   end
 
   add_index "ecm_market_data_bars", ["ecm_market_data_time_series_id"], :name => "index_ecm_market_data_bars_on_ecm_market_data_time_series_id"
+
+  create_table "ecm_market_data_imports", :force => true do |t|
+    t.integer  "ecm_market_data_time_series_id"
+    t.string   "data_file_name"
+    t.integer  "data_file_size"
+    t.string   "data_content_type"
+    t.datetime "data_updated_at"
+    t.string   "data_image_fingerprint"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "ecm_market_data_instruments", :force => true do |t|
     t.string   "name"

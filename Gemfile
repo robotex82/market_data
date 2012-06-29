@@ -44,3 +44,6 @@ end
 
 # To use active admin
 gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
+
+# To use paperclip
+gem "paperclip", "~> 2.7"
