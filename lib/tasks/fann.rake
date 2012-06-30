@@ -22,63 +22,76 @@ namespace :fann do
     outputs = fann.run([0.7, 0.9, 0.2])   
   end
   
-  desc 'trains on dax data'
+  desc 'Tries to guess last year'
   task :train_test, [] => :environment do
     # Load time series
     ts = Ecm::MarketData::TimeSeries.load("Dukascopy", "EUR/USD", "1 Day")
     
     # create new fan configuration
-    fc = Fann::Configurations::OHLC::EurUsd.new(ts, 4, 1, [ 20, 20, 20 ], 0.1)
+    fc = Fann::Configurations::OHLC::EurUsd.new(ts, 10, 1, [ 20, 20, 20 ], 0.1)
 
     # prepare test data (previous last year)
-    fc.prepare
+    fc.prepare(:lookback => 10)
     
     # Training using data created above:
-    fc.train
+    fc.train(:max_epochs => 1000000, :epochs_between_reports => 1000, :desired_error => 0.000001)
 
     # save neuron config to file    
     fc.save
 
-    # load last year real data
-    bars = ts.ecm_market_data_bars.last_year.map(&:to_ohlc)
-    # init stats
-    guesses = { :total => 0, :correct => 0, :wrong => 0 }
+
+
     
     # process real data
+    
+    # init stats
+    stats = { :total => 0, :correct => 0, :wrong => 0 }
+    
+    # load previous last year bars form time series and transform them to a ohlc hash
+    bars = ts.ecm_market_data_bars.starting_at(1.year.ago).map(&:to_ohlc)
+    p "Loaded #{bars.size} bars "
+    
+    # loop over bars
+    lookback = 10
     bars.each_with_index do |bar, index|
-      next if index <= 1
-      inputs = [(bars[index-1][:open] * fc.normalization_factor), (bars[index-1][:high]* fc.normalization_factor), (bars[index-1][:low] * fc.normalization_factor), (bars[index-1][:close] * fc.normalization_factor)]
-      should_output = bar[:close]
-      output = fc.run(inputs)
+      # skip n bars as we need a lookback
+      next if index < lookback
 
-      p "o: #{bar[:open]}"
-      p "h: #{bar[:high]}"
-      p "l: #{bar[:low]}"
-      p "c: #{bar[:close]}"      
-      p "gc: #{output.first / fc.normalization_factor}"
-      p "diff: #{((output.first / fc.normalization_factor) - should_output)}"
       
-      if bar[:open] < bar[:close]
-        p "Should: buy"
-      else
-        p "Should: sell"      
-      end  
+      input_data = []
+      lookback.times do |lookback|  
+        # get previous bar as input
+        previous_bar = bars[index - lookback - 1 ]   
+        
+        # normalize values for fann input
+        previous_bar.map { |value| value * fc.normalization_factor }  
+        
+        # Add previous bar ohlc data as input for fann
+        input_data << previous_bar[:close] 
+#        input_data << previous_bar[:open] 
+#        input_data << previous_bar[:high]             
+#        input_data << previous_bar[:low] 
+#        input_data << previous_bar[:close] 
+      end
+      # Add previous bar ohlc data as input for fann
+      fann_output = fc.run( input_data )
       
-      if bar[:open] < (output.first / fc.normalization_factor)
-        p "Guessed: buy"
-      else
-        p "Guessed: sell"      
-      end  
-      p "================================================================================"  
+      # Use actual bar close as desired output for fann
+      desired_output = bar[:close]
       
-      if (bar[:open] < bar[:close] && bar[:open] < (output.first / fc.normalization_factor)) || bar[:open] > bar[:close] && bar[:open] > (output.first / fc.normalization_factor)
-        guesses[:correct] += 1
+#      p "Open:  #{"%.4f" % bar[:open]}"       
+#      p "Close: #{"%.4f" % bar[:close]}"       
+#      p "Guess: #{"%.4f" % fann_output.first}"
+#      p "================================================================================"
+      p "#{"%.4f" % bar[:close]};#{"%.4f" % fann_output.first}".gsub(".",",")
+      
+      stats[:total] += 1
+      if (bar[:open] < bar[:close] && bar[:open] < fann_output.first) || (bar[:open] > bar[:close] && bar[:open] > fann_output.first)
+        stats[:correct] += 1
       else
-        guesses[:wrong] += 1
+        stats[:wrong] += 1      
       end  
-      guesses[:total] += 1
-    end
-    # output stats
-    guesses.each { |k, v| p "#{k}: #{v}" }
+    end  
+    p stats.inspect
   end
 end

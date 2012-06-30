@@ -23,12 +23,13 @@ class Fann::Configurations::OHLC::EurUsd < Fann::Configurations::Base
         # normalize values for fann input
         previous_bar.map { |value| value * normalization_factor }  
         
-        # Add previous bar ohlc data as input for fann
-         
-        input_data << previous_bar[:open] 
-        input_data << previous_bar[:high]             
-        input_data << previous_bar[:low] 
-        input_data << previous_bar[:close] 
+        
+        input_data << previous_bar[:close]
+#        # Add previous bar ohlc data as input for fann
+#        input_data << previous_bar[:open] 
+#        input_data << previous_bar[:high]             
+#        input_data << previous_bar[:low] 
+#        input_data << previous_bar[:close] 
       end
       # Add previous bar ohlc data as input for fann
       @inputs <<  input_data
