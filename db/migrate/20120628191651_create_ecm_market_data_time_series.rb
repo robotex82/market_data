@@ -6,7 +6,7 @@ class CreateEcmMarketDataTimeSeries < ActiveRecord::Migration
       t.integer :ecm_market_data_bars_count
       t.references :ecm_market_data_provider
       t.references :ecm_market_data_instrument
-      t.references :ecm_market_data_resoution
+      t.references :ecm_market_data_resolution
 
       t.timestamps
     end

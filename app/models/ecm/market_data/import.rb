@@ -46,7 +46,7 @@ class Ecm::MarketData::Import < ActiveRecord::Base
         timestamp_string = "#{row[0]} #{row[1]}"
         #timestamp = Time.strptime(timestamp_string, '%d-%m-%Y %H:%M:%S')
         #p timestamp_string
-        timestamp = DateTime.strptime(timestamp_string, "%d-%m-%Y %H:%M:%S") rescue next
+        timestamp = DateTime.strptime(timestamp_string, "%m/%d/%Y %H:%M:%S") rescue next
         row[2..7].each do |element|
           element.gsub!(',', '.').to_f
         end

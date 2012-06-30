@@ -12,6 +12,7 @@ class CreateEcmMarketDataInstruments < ActiveRecord::Migration
     Ecm::MarketData::Instrument.create!(:name => 'DAX Index')
     Ecm::MarketData::Instrument.create!(:name => 'Euro Stoxx 50')
     Ecm::MarketData::Instrument.create!(:name => 'EUR/USD')
+    Ecm::MarketData::Instrument.create!(:name => 'XAU/USD')
     Ecm::MarketData::Instrument.create!(:name => 'Euro Bund Future')
     Ecm::MarketData::Instrument.create!(:name => 'Apple Inc.')
   end

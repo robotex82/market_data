@@ -13,3 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore paperclip files
+public/system
+
+# Ignore dumped db data
+db/data.yml

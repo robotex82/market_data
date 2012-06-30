@@ -6,7 +6,7 @@ class CreateEcmMarketDataImports < ActiveRecord::Migration
       t.integer :data_file_size
       t.string :data_content_type
       t.timestamp :data_updated_at
-      t.string :data_image_fingerprint
+      t.string :data_fingerprint
 
       t.timestamps
     end

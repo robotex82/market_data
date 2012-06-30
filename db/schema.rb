@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20120628212451) do
     t.integer  "data_file_size"
     t.string   "data_content_type"
     t.datetime "data_updated_at"
-    t.string   "data_image_fingerprint"
+    t.string   "data_fingerprint"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(:version => 20120628212451) do
     t.integer  "ecm_market_data_bars_count"
     t.integer  "ecm_market_data_provider_id"
     t.integer  "ecm_market_data_instrument_id"
-    t.integer  "ecm_market_data_resoution_id"
+    t.integer  "ecm_market_data_resolution_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end

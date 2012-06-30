@@ -47,3 +47,9 @@ gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
 
 # To use paperclip
 gem "paperclip", "~> 2.7"
+
+# To use ruby fann
+gem "ruby-fann"
+
+# To use yaml db
+gem 'yaml_db', :git => 'git://github.com/lostapathy/yaml_db.git'
