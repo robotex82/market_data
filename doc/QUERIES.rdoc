@@ -1,0 +1,4 @@
+= ROC for the last bar of daily gold data from dukascopy
+
+  bar = Ecm::MarketData::TimeSeries.load("Dukascopy", "XAU/USD", "1 Day").ecm_market_data_bars.last
+  bar.previous_including_self(2).map(&:to_ohlc).reverse.indicator(:roc, :time_period => 1)
