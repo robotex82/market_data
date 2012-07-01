@@ -53,3 +53,6 @@ gem "ruby-fann"
 
 # To use yaml db
 gem 'yaml_db', :git => 'git://github.com/lostapathy/yaml_db.git'
+
+# To use google charts
+gem "google_visualr", ">= 2.1"

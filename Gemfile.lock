@@ -79,6 +79,7 @@ GEM
     fastercsv (1.5.5)
     formtastic (2.1.1)
       actionpack (~> 3.0)
+    google_visualr (2.1.2)
     has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.0)
@@ -174,6 +175,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   coffee-rails (~> 3.2.1)
+  google_visualr (>= 2.1)
   jquery-rails
   paperclip (~> 2.7)
   rails (= 3.2.6)

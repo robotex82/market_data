@@ -53,9 +53,10 @@ class Ecm::MarketData::Import < ActiveRecord::Base
 
         volume = row[2]
         open = row[3]
-        high = row[4]
+        close = row[4]
         low = row[5]
-        close = row[6]
+        high = row[6]
+
         data << { :start_at => timestamp, :volume => volume, :open => open, :high => high, :low => low, :close => close }
       end
       return data
