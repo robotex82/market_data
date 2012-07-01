@@ -21,6 +21,12 @@ GIT
   specs:
     yaml_db (0.2.2)
 
+PATH
+  remote: ~/ruby/indicator
+  specs:
+    indicator (0.0.3)
+      talib_ruby (~> 1.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -153,6 +159,7 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
+    talib_ruby (1.0.4)
     thin (1.3.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -176,12 +183,14 @@ DEPENDENCIES
   activeadmin!
   coffee-rails (~> 3.2.1)
   google_visualr (>= 2.1)
+  indicator!
   jquery-rails
   paperclip (~> 2.7)
   rails (= 3.2.6)
   ruby-fann
   sass-rails (~> 3.2.3)
   sqlite3
+  talib_ruby
   thin
   uglifier (>= 1.0.3)
   yaml_db!

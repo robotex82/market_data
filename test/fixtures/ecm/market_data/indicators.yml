@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  inputs: MyString
+  ecm_market_data_indicator_values_count: 1
+
+two:
+  name: MyString
+  inputs: MyString
+  ecm_market_data_indicator_values_count: 1

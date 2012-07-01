@@ -56,3 +56,10 @@ gem 'yaml_db', :git => 'git://github.com/lostapathy/yaml_db.git'
 
 # To use google charts
 gem "google_visualr", ">= 2.1"
+
+# To use ta-lib
+# env ARCHFLAGS="-arch x86_64" gem install talib_ruby -- --with-talib-include=/usr/local/include/ta-lib  --with-talib-lib=/usr/local/lib
+gem 'talib_ruby'
+
+# To use indicator
+gem 'indicator', :path => '~/ruby/indicator'

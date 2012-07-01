@@ -7,8 +7,8 @@ class Ecm::MarketData::TimeSeries < ActiveRecord::Base
   has_many :ecm_market_data_bars, 
            :class_name  => 'Ecm::MarketData::Bar',
            :dependent   => :destroy,
-           :foreign_key => 'ecm_market_data_time_series_id',
-           :order => 'start_at ASC'
+           :foreign_key => 'ecm_market_data_time_series_id' # ,
+           # :order => 'start_at ASC'
 
   
   # Attributes

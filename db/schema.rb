@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628212451) do
+ActiveRecord::Schema.define(:version => 20120701140009) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(:version => 20120628212451) do
     t.float    "low"
     t.float    "close"
     t.integer  "ecm_market_data_time_series_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.integer  "ecm_market_data_indicator_values_count", :default => 0, :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   add_index "ecm_market_data_bars", ["ecm_market_data_time_series_id"], :name => "index_ecm_market_data_bars_on_ecm_market_data_time_series_id"
@@ -69,6 +70,25 @@ ActiveRecord::Schema.define(:version => 20120628212451) do
     t.string   "data_fingerprint"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "ecm_market_data_indicator_values", :force => true do |t|
+    t.integer  "ecm_market_data_bar_id"
+    t.integer  "ecm_market_data_indicator_id"
+    t.text     "inputs"
+    t.text     "outputs"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "ecm_market_data_indicator_values", ["ecm_market_data_bar_id"], :name => "index_ecm_market_data_indicator_values_on_ecm_market_data_bar_id"
+
+  create_table "ecm_market_data_indicators", :force => true do |t|
+    t.string   "name"
+    t.text     "default_inputs"
+    t.integer  "ecm_market_data_indicator_values_count"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "ecm_market_data_instruments", :force => true do |t|

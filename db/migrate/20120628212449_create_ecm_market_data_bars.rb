@@ -8,6 +8,7 @@ class CreateEcmMarketDataBars < ActiveRecord::Migration
       t.float :low
       t.float :close
       t.references :ecm_market_data_time_series
+      t.integer :ecm_market_data_indicator_values_count, :default => 0, :null => false
 
       t.timestamps
     end

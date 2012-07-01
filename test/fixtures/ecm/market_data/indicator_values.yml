@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ecm_market_data_bar: 
+  name: MyString
+  inputs: MyString
+  outputs: MyString
+
+two:
+  ecm_market_data_bar: 
+  name: MyString
+  inputs: MyString
+  outputs: MyString
