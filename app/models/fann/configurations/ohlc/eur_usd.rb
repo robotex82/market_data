@@ -1,6 +1,6 @@
 class Fann::Configurations::OHLC::EurUsd < Fann::Configurations::Base
   def prepare(options = {})
-    options.reverse_merge!({ :lookback => 1 })
+    options.reverse_merge!({ :lookback => 1, :offset => 0 })
   
     # @data is a Ecm::MarketData::TimeSeries
     ts = self.data   
@@ -12,13 +12,13 @@ class Fann::Configurations::OHLC::EurUsd < Fann::Configurations::Base
     # loop over bars
     bars.each_with_index do |bar, index|
       # skip n bars as we need a lookback
-      next if index < options[:lookback]
+      next if index < (options[:lookback] + options[:offset])
 
       
       input_data = []
       options[:lookback].times do |lookback|  
         # get previous bar as input
-        previous_bar = bars[index - lookback - 1 ]   
+        previous_bar = bars[index - (lookback + options[:offset]) - 1 ]   
         
         # normalize values for fann input
         previous_bar.map { |value| value * normalization_factor }  

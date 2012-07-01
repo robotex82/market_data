@@ -24,17 +24,21 @@ namespace :fann do
   
   desc 'Tries to guess last year'
   task :train_test, [] => :environment do
+    lookback = 10
+    offset = 10
+  
     # Load time series
     ts = Ecm::MarketData::TimeSeries.load("Dukascopy", "EUR/USD", "1 Day")
     
     # create new fan configuration
-    fc = Fann::Configurations::OHLC::EurUsd.new(ts, 10, 1, [ 20, 20, 20 ], 0.1)
+    #fc = Fann::Configurations::OHLC::EurUsd.new(ts, 10, 1, [ 20, 20, 20 ], 0.1)
+    fc = Fann::Configurations::OHLC::EurUsd.new(ts, 10, 1, [ 7 ], 0.1)
 
     # prepare test data (previous last year)
-    fc.prepare(:lookback => 10)
+    fc.prepare(:lookback => lookback, :offset => offset)
     
     # Training using data created above:
-    fc.train(:max_epochs => 1000000, :epochs_between_reports => 1000, :desired_error => 0.000001)
+    fc.train(:max_epochs => 5000, :epochs_between_reports => 1000, :desired_error => 0.000001)
 
     # save neuron config to file    
     fc.save
@@ -52,16 +56,16 @@ namespace :fann do
     p "Loaded #{bars.size} bars "
     
     # loop over bars
-    lookback = 10
+
     bars.each_with_index do |bar, index|
       # skip n bars as we need a lookback
-      next if index < lookback
+      next if index < (lookback + offset)
 
       
       input_data = []
       lookback.times do |lookback|  
         # get previous bar as input
-        previous_bar = bars[index - lookback - 1 ]   
+        previous_bar = bars[index - (lookback + offset) - 1 ]   
         
         # normalize values for fann input
         previous_bar.map { |value| value * fc.normalization_factor }  
